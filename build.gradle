@@ -1,0 +1,66 @@
+buildscript {
+    ext.kotlin_version = '1.2.30'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+group 'net.themkat.spek.spring.utils'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+    maven { url "https://dl.bintray.com/spekframework/spek-dev" }
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    compileOnly('org.springframework.boot:spring-boot-starter-test:2.0.5.RELEASE')
+    // added here as well to emulate mavens provided scope
+    testCompile('org.springframework.boot:spring-boot-starter-test:2.0.5.RELEASE')
+
+    testCompile("org.springframework.boot:spring-boot-starter-web:2.0.5.RELEASE")
+    testCompile("org.springframework.boot:spring-boot-starter-data-jpa:2.0.5.RELEASE")
+    testCompile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.0.10.RELEASE'
+
+    compile group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    //testCompile("com.h2database:h2")
+
+    testImplementation 'org.amshove.kluent:kluent:1.41'
+    testImplementation "io.mockk:mockk:1.8.7"
+
+    testImplementation ('org.spekframework.spek2:spek-dsl-jvm:2.0.0-alpha.1')  {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+
+    testRuntimeOnly ('org.spekframework.spek2:spek-runner-junit5:2.0.0-alpha.1') {
+        exclude group: 'org.junit.platform'
+        exclude group: 'org.jetbrains.kotlin'
+    }
+
+    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'spek2'
+    }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
