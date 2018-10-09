@@ -43,7 +43,9 @@ object SpringContextSpec : Spek({
                 // important here :)
                 val game = Game(3, "The Legend of Zelda: Ocarina of Time", 1997, "Nintendo")
 
-                gameRepository.save(game)
+                transactional {
+                    gameRepository.save(game)
+                }
 
                 val gameFetchedFromDb = gameRepository.findById(game.id).orElseGet {
                     fail("game with id 1 could not be found in database")

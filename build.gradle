@@ -24,10 +24,12 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     compileOnly('org.springframework.boot:spring-boot-starter-test:2.0.5.RELEASE')
+    compileOnly("org.springframework.boot:spring-boot-starter-data-jpa:2.0.5.RELEASE")
     // added here as well to emulate mavens provided scope
     testCompile('org.springframework.boot:spring-boot-starter-test:2.0.5.RELEASE')
 
     testCompile("org.springframework.boot:spring-boot-starter-web:2.0.5.RELEASE")
+    // added here as well to emulate mavens provided scope
     testCompile("org.springframework.boot:spring-boot-starter-data-jpa:2.0.5.RELEASE")
     testCompile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.0.10.RELEASE'
 
@@ -35,7 +37,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    //testCompile("com.h2database:h2")
+    testCompile("com.h2database:h2:1.4.197")
 
     testImplementation 'org.amshove.kluent:kluent:1.41'
     testImplementation "io.mockk:mockk:1.8.7"

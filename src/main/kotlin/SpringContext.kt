@@ -1,9 +1,8 @@
 package net.themkat.spek.spring.utils.context
 
-import org.springframework.context.ApplicationContext
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import org.springframework.context.support.beans
+import org.springframework.transaction.annotation.Transactional
 
 class SpringContext {
     var applicationContext: ConfigurableApplicationContext
@@ -21,11 +20,15 @@ class SpringContext {
 
     fun <T> inject(clazz: Class<T>) = applicationContext.getBean(clazz)
 
-    fun <T> autowire(clazz : Class<T>) = inject(clazz)
+    fun <T> autowire(clazz: Class<T>) = inject(clazz)
+
+    @Transactional
+    fun transactional(operation: () -> Unit) = operation()
 }
 
+//  = Thread.currentThread().stackTrace[0].javaClass.`package`.name
 fun springContext(basePackage: String, springContextBody: SpringContext.() -> Unit) {
     val springContext: SpringContext = SpringContext(basePackage)
     springContext.springContextBody()
-    springContext.closeContext()
+    //springContext.closeContext() // TODO: find a way to close this once spek is done
 }
