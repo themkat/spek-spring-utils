@@ -24,9 +24,9 @@ open class TestDataConfig
 
 @Entity
 @Table(name = "Game")
-open class Game(@Id val id: Number = 0,
+open class Game(@Id val id: Int = 0,
                 val name: String = "",
-                @Column(name = "releaseYear") val releaseYear: Number = 0,
+                @Column(name = "releaseYear") val releaseYear: Int = 0,
                 val developer: String = "")
 
 @Repository
