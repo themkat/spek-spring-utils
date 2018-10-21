@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 class MockMvc(val controller: Any) {
 
-    fun mockMvc() = MockMvcBuilders.standaloneSetup(controller).build()
+    fun standaloneSetup() = MockMvcBuilders.standaloneSetup(controller).build()
 
     fun get(url: String) = MockMvcRequestBuilders.get(url)
 
