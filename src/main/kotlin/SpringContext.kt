@@ -26,7 +26,6 @@ class SpringContext {
     fun transactional(operation: () -> Unit) = operation()
 }
 
-//  = Thread.currentThread().stackTrace[0].javaClass.`package`.name
 fun springContext(basePackage: String, springContextBody: SpringContext.() -> Unit) {
     val springContext: SpringContext = SpringContext(basePackage)
     springContext.springContextBody()
