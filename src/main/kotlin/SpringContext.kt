@@ -16,7 +16,6 @@ class SpringContext {
     }
 
     internal fun closeContext() {
-        println("closing context")
         applicationContext.close()
     }
 
