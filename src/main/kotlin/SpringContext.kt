@@ -19,9 +19,9 @@ class SpringContext {
         applicationContext.close()
     }
 
-    fun <T> inject(clazz: Class<T>) = applicationContext.getBean(clazz)
+    inline fun <reified T> inject() = applicationContext.getBean(T::class.java)
 
-    fun <T> autowire(clazz: Class<T>) = inject(clazz)
+    inline fun <reified T> autowire() = inject<T>()
 
     @Transactional
     fun transactional(operation: () -> Unit) = operation()

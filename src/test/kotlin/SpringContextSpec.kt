@@ -11,7 +11,7 @@ import kotlin.test.fail
 
 object SpringContextSpec : Spek({
     springContext("net.themkat.spek.spring.utils.testing") {
-        val gameRepository: GameRepository = inject(GameRepository::class.java)
+        val gameRepository: GameRepository = inject<GameRepository>()
 
         describe("fetching game data from database") {
             fun Game.`should equal Wolfenstein 3D`() {
