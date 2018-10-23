@@ -1,5 +1,6 @@
 package net.themkat.spek.spring.utils.context
 
+import org.spekframework.spek2.dsl.Root
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.transaction.annotation.Transactional
@@ -15,6 +16,7 @@ class SpringContext {
     }
 
     internal fun closeContext() {
+        println("closing context")
         applicationContext.close()
     }
 
@@ -26,8 +28,11 @@ class SpringContext {
     fun transactional(operation: () -> Unit) = operation()
 }
 
-fun springContext(basePackage: String, springContextBody: SpringContext.() -> Unit) {
+fun Root.springContext(basePackage: String, springContextBody: SpringContext.() -> Unit) {
     val springContext: SpringContext = SpringContext(basePackage)
     springContext.springContextBody()
-    //springContext.closeContext() // TODO: find a way to close this once spek is done
+
+    afterGroup {
+        springContext.closeContext()
+    }
 }
