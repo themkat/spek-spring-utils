@@ -13,6 +13,7 @@ group 'net.themkat.spek.spring.utils'
 version '0.1.0-SNAPSHOT'
 
 apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
 
 repositories {
     mavenCentral()
@@ -69,4 +70,13 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+// publihsing settings
+publishing {
+    publications {
+        mavenLibPub(MavenPublication) {
+            from components.java
+        }
+    }
 }
