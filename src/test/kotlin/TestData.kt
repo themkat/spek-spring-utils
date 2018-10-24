@@ -39,5 +39,5 @@ class GameRestController(val gameRepository: GameRepository) {
     fun getAllGames() = gameRepository.findAll()
 
     @GetMapping("/game/{id}")
-    fun getGameById(@PathVariable id: Number) = gameRepository.findById(id).orElseThrow { throw Exception("Game not found") }
+    fun getGameById(@PathVariable id: Int) = gameRepository.findById(id).orElseThrow { throw Exception("Game not found") }
 }
