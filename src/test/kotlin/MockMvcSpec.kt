@@ -29,10 +29,10 @@ object MockMvcSpec : Spek({
 
                 mockMvc.perform(get("/game/$gameId"))
                         .andExpect(status().isOk())
-                        .andExpect(jsonPathEquals("$.id", "$gameId"))
-                        .andExpect(jsonPathEquals("$.name", "$gameName"))
-                        .andExpect(jsonPathEquals("$.releaseYear", "$gameReleaseYear"))
-                        .andExpect(jsonPathEquals("$.developer", "$gameDeveloper"))
+                        .andExpect(jsonPathEquals("$.id", gameId))
+                        .andExpect(jsonPathEquals("$.name", gameName))
+                        .andExpect(jsonPathEquals("$.releaseYear", gameReleaseYear))
+                        .andExpect(jsonPathEquals("$.developer", gameDeveloper))
             }
         }
     }

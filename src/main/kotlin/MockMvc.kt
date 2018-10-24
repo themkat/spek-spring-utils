@@ -24,7 +24,7 @@ class MockMvc(val controller: Any) {
 
     fun <T> jsonPath(expression: String, matcher: Matcher<T>) = MockMvcResultMatchers.jsonPath(expression, matcher)
 
-    fun jsonPathEquals(expression: String, equals: String) = jsonPath(expression).value(CoreMatchers.equalTo(equals))
+    fun jsonPathEquals(expression: String, equals: Any) = jsonPath(expression).value(CoreMatchers.equalTo(equals))
 
     fun jsonPathSize(expression: String, size: Int) = jsonPath(expression, hasSize<Number>(size))
 }
