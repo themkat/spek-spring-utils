@@ -3,3 +3,5 @@
 buid
 out
 gradle
+
+envsetup.sh

@@ -3,14 +3,17 @@ buildscript {
 
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
     }
 }
+apply plugin: 'com.jfrog.bintray'
 
 group 'net.themkat.spek.spring.utils'
-version '0.1.0-SNAPSHOT'
+version '0.1.0'
 
 apply plugin: 'kotlin'
 apply plugin: 'maven-publish'
@@ -78,5 +81,17 @@ publishing {
         mavenLibPub(MavenPublication) {
             from components.java
         }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['mavenLibPub']
+    pkg {
+        repo =  'spek-spring-utils'
+        name = 'net.themkat.spek.spring.utils'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/markydawn/spek-spring-utils'
     }
 }
