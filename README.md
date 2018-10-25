@@ -19,8 +19,40 @@ This project is a work-in-progress, and things may change. Below is a list of bu
 Want to try this testing library in your project? Feel free to :) Either by building the latest version on Github yourself, or by using the dependencies from the Bintray repo.
 
 ### Maven dependency
+You first need to add the Bintray repository for this project:
+```xml
+    <repositories>
+        <repository>
+            <id>spek-spring-utils</id>
+            <url>https://dl.bintray.com/themkat/spek-spring-utils</url>
+        </repository>
+    </repositories>
+```
+
+Then simply add the dependency like normal:
+```xml
+        <dependency>
+            <groupId>net.themkat.spek.spring.utils</groupId>
+            <artifactId>spek-spring-utils</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+```
+
 
 ### Gradle dependency
+Like Maven, you first need to add the Bintray repository for this project:
+```
+repositories {
+    maven {
+        url  "https://dl.bintray.com/themkat/spek-spring-utils" 
+    }
+}
+```
+
+Then simply add the dependency like normal:
+```
+testCompile("net.themkat.spek.spring.utils:spek-spring-utils:0.1.0")
+```
 
 
 ## Dependencies needed
