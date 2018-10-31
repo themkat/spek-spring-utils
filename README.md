@@ -1,7 +1,7 @@
 # Spek Spring Utils
 The goal of this project is to make testing Spring applications painless when using Spek as a testing framework. Obviously the name and initial goal of MockMVC testing comes from [spock-spring-utils](https://github.com/jarlehansen/spock-spring-utils). This started as me just hacking away in the evenings and learning more about Spring (out of need, because the hassle of using it with Spek bothered me), so it may have some issues. I still hope that it may evolve into something usable in the near future. So far only tested with Spring Boot, but should work on old Spring as well. I probably have to test it and maybe fix some dependency handling, as well as cleaning the code. 
 
-## NOTE: This is an early version and may have issues. Feel free to report any issues you may have if you try it! Note that there may be some obvious improvements that can be done in the code, so take that into consideration before reporting. 
+## NOTE: This is an early version and may have issues. Feel free to report any issues you may have if you try it! Note that there may be some obvious improvements that can be done in the code, so take that into consideration before reporting. This project used Spek2, so there may be (and probably are) incompatibilities to the old version of Spek.
 
 
 ## TODOs and missing functionality
@@ -66,6 +66,34 @@ Will probably be updated as Spring Boot dependencies was used for this project. 
 * org.springframework.boot:spring-boot-starter-data-jpa
 
 You will also need the Kotlin standard library and the Kotlin-reflect package. 
+
+
+### Running the Spek tests with Maven
+The easiest way to run the tests is without a doubt the Spek plugin for IntelliJ IDEA, but you may want it as part of your build pipeline in CI systems (or maybe you just enjoy the terminal like me ;) ). To be able to run your Spek tests using `mvn clean install`, `mvn test` or something similar, you will have to add a Test Engine. Spek 2 uses JUnit 5, so the natural choice for me is to add a dependency to that engine (the version is simply there as an example):
+
+```xml
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.3.1</version>
+			<scope>test</scope>
+		</dependency>
+```
+
+You may also want to configure the Maven Surefire plugin to pick up your tests if you use a different naming strategy than Test at the end of the name. I prefer to use Spec at the end of the names in my tests (because I read them as specifications almost more than tests). To make Surefire plugin pick up your tests, you can add the following to your build plugins (Surefire version added just as an example):
+
+```xml
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Spec.*</include>
+                    </includes>
+                </configuration>
+            </plugin>
+```
+
 
 ## Usage examples
 Separate examples will be added here. To get started quickly, take a look in the test-folder for examples. Different examples will be added below.
