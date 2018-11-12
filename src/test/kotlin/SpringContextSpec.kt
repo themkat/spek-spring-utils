@@ -1,11 +1,15 @@
 package net.themkat.spek.spring.utils.testing
 
+import net.themkat.spek.spring.utils.context.springBootContext
 import net.themkat.spek.spring.utils.context.springContext
 import net.themkat.spek.spring.utils.testing.data.Game
 import net.themkat.spek.spring.utils.testing.data.GameRepository
+import net.themkat.spek.spring.utils.testing.data.TestDataConfig
 import org.amshove.kluent.shouldEqual
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
+import org.springframework.core.env.Environment
+import org.springframework.core.env.get
 import kotlin.test.fail
 
 
@@ -57,5 +61,22 @@ object SpringContextSpec : Spek({
                 gameFetchedFromDb.developer shouldEqual game.developer
             }
         }
+    }
+})
+
+
+object SpringBootSpec : Spek({
+    springBootContext(TestDataConfig::class.java) {
+
+        describe("getting properties from file") {
+            val environment = inject<Environment>()
+
+            it("should return the correct properties") {
+                val userName = environment["spring.datasource.url"]
+
+                userName shouldEqual "jdbc:h2:mem:spektest"
+            }
+        }
+
     }
 })
