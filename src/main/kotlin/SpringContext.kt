@@ -20,7 +20,7 @@ class SpringContext {
         }
     }
 
-    internal fun closeContext() {
+    fun closeContext() {
         applicationContext.close()
     }
 
@@ -41,8 +41,8 @@ fun Root.springContext(basePackage: String, springContextBody: SpringContext.() 
     }
 }
 
-fun <T> Root.springBootContext(mainClass: Class<T>, springContextBody: SpringContext.() -> Unit) {
-    val springApplication = SpringApplication(mainClass)
+inline fun <reified T> Root.springBootContext(springContextBody: SpringContext.() -> Unit) {
+    val springApplication = SpringApplication(T::class.java)
     val applicationContext = springApplication.run()
     val springContext = SpringContext(applicationContext)
     springContext.springContextBody()
